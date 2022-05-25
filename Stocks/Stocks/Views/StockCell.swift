@@ -7,57 +7,51 @@
 
 import UIKit
 
-class StockCell: UITableViewCell {
+final class StockCell: UITableViewCell {
 
-	private lazy var iconView: UIImageView = {
-		let image = UIImageView()
-		image.contentMode = .scaleAspectFit
-		image.translatesAutoresizingMaskIntoConstraints = false
+	private let containerView = UIView()
+
+	private lazy var iconImageView: UIImageView = {
+		let image = UIImageView(image: UIImage(named: "YNDX"))
 		image.layer.cornerRadius = 12
 		image.clipsToBounds = true
-		image.image = UIImage(named: "YNDX")
 		return image
 	}()
 
-	private lazy var symbolName: UILabel = {
+	private lazy var symbolNameLabel: UILabel = {
 		let label = UILabel()
 		label.text = "YNDX"
 		label.font = UIFont.boldSystemFont(ofSize: 18)
-		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
 
-	private lazy var companyName: UILabel = {
+	private lazy var companyNameLabel: UILabel = {
 		let label = UILabel()
 		label.text = "Yandex, LLC"
 		label.font = .systemFont(ofSize: 12)
-		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
 
-	private lazy var currentPrice: UILabel = {
+	private lazy var currentPriceLabel: UILabel = {
 		let label = UILabel()
 		label.text = "4 764,6 ₽"
-		label.font = UIFont.boldSystemFont(ofSize: 24)
-		label.translatesAutoresizingMaskIntoConstraints = false
+		label.font = UIFont.boldSystemFont(ofSize: 18)
 		return label
 	}()
 
-	private lazy var dayDelta: UILabel = {
+	private lazy var dayDeltaLabel: UILabel = {
 		let label = UILabel()
 		label.text = "+55 ₽ (1,15%)"
 		label.font = .systemFont(ofSize: 12)
 		label.textColor = UIColor(red: 36/255, green: 178/255, blue: 93/255, alpha: 1)
-		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
 
-	private lazy var favoutriteButton: UIButton = {
+	private lazy var addToFavouriteButton: UIButton = {
 		let button = UIButton(type: .custom)
 		button.setTitle("Star", for: .normal)
 		button.setImage(UIImage(named:"star"), for: .normal)
 		button.imageView?.contentMode = .scaleAspectFit
-		button.translatesAutoresizingMaskIntoConstraints = false
 		return button
 	}()
 
@@ -71,52 +65,70 @@ class StockCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	override func layoutSubviews() {
-		super.layoutSubviews()
-
-		contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0))
-	}
-
 	private func setupViews(){
-		contentView.addSubview(iconView)
-		contentView.addSubview(symbolName)
-		contentView.addSubview(companyName)
-		contentView.addSubview(favoutriteButton)
-		contentView.addSubview(currentPrice)
-		contentView.addSubview(dayDelta)
+		[iconImageView, symbolNameLabel, companyNameLabel, addToFavouriteButton, currentPriceLabel, dayDeltaLabel].forEach {
+			containerView.addSubview($0)
+			$0.translatesAutoresizingMaskIntoConstraints = false
+		}
 
-
+		contentView.addSubview(containerView)
+		containerView.translatesAutoresizingMaskIntoConstraints = false
 
 		setupContraints()
 	}
 
 	private func setupContraints(){
-		iconView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8).isActive = true
-		iconView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
-		iconView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-		iconView.heightAnchor.constraint(equalToConstant: 52).isActive = true
-		iconView.widthAnchor.constraint(equalToConstant: 52).isActive = true
+		NSLayoutConstraint.activate([
+			containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+			containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+			containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+			containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
 
-		symbolName.leadingAnchor.constraint(equalTo: iconView.trailingAnchor, constant: 12).isActive = true
-		symbolName.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 14).isActive = true
+			iconImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
+			iconImageView.heightAnchor.constraint(equalToConstant: 52),
+			iconImageView.widthAnchor.constraint(equalToConstant: 52),
+			iconImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
+			iconImageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
 
-		companyName.leadingAnchor.constraint(equalTo: iconView.trailingAnchor, constant: 12).isActive = true
-		companyName.topAnchor.constraint(equalTo: symbolName.bottomAnchor).isActive = true
+			symbolNameLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 12),
+			symbolNameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 14),
 
-		favoutriteButton.leadingAnchor.constraint(equalTo: symbolName.trailingAnchor, constant: 6).isActive = true
-		favoutriteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 17).isActive = true
-		favoutriteButton.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 35).isActive = true
-		favoutriteButton.heightAnchor.constraint(equalToConstant: 16).isActive = true
-		favoutriteButton.widthAnchor.constraint(equalToConstant: 16).isActive = true
+			companyNameLabel.leadingAnchor.constraint(equalTo: symbolNameLabel.leadingAnchor),
+			companyNameLabel.topAnchor.constraint(equalTo: symbolNameLabel.bottomAnchor),
 
-		currentPrice.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 14).isActive = true
-		currentPrice.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -17).isActive = true
+			addToFavouriteButton.leadingAnchor.constraint(equalTo: symbolNameLabel.trailingAnchor, constant: 6),
+			addToFavouriteButton.heightAnchor.constraint(equalToConstant: 16),
+			addToFavouriteButton.widthAnchor.constraint(equalToConstant: 16),
+			addToFavouriteButton.centerYAnchor.constraint(equalTo: symbolNameLabel.centerYAnchor),
 
-		dayDelta.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12).isActive = true
-		dayDelta.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-		dayDelta.topAnchor.constraint(equalTo: currentPrice.bottomAnchor).isActive = true
+			currentPriceLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 14),
+			currentPriceLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -17),
 
+			dayDeltaLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -12),
+			dayDeltaLabel.centerYAnchor.constraint(equalTo: companyNameLabel.centerYAnchor)
+		])
 	}
 
+	func configure(for indexPath: IndexPath) {
+		if indexPath.row % 2 == 0 {
+			containerView.backgroundColor = UIColor.StockCell.grayCellBackground
+		}
+		else {
+			containerView.backgroundColor = UIColor.StockCell.whiteCellBackground
+		}
+		containerView.layer.cornerRadius = 16
+		selectionStyle = .none
+	}
+}
 
+
+extension UIColor {
+	fileprivate enum StockCell {
+		static var grayCellBackground: UIColor  {
+			return UIColor(red: 240/255, green: 244/255, blue: 247/255, alpha: 1)
+		}
+		static var whiteCellBackground: UIColor {
+			return UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+		}
+	}
 }

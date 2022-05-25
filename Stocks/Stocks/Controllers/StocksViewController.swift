@@ -7,14 +7,13 @@
 
 import UIKit
 
-class StocksViewController: UIViewController {
+final class StocksViewController: UIViewController {
 
 	private lazy var tableView: UITableView = {
 		let tableView = UITableView()
 		tableView.translatesAutoresizingMaskIntoConstraints = false
 		tableView.separatorStyle = .none
 		tableView.register(StockCell.self, forCellReuseIdentifier: String(describing: StockCell.typeName))
-
 		return tableView
 	}()
 
@@ -25,6 +24,7 @@ class StocksViewController: UIViewController {
 		view.backgroundColor = .white
 
 		tableView.dataSource = self
+//		tableView.delegate = self
 	}
 
 	private func setupSubviews(){
@@ -40,16 +40,10 @@ class StocksViewController: UIViewController {
 
 extension StocksViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: StockCell.typeName, for: indexPath) as! StockCell
-
-		cell.layer.cornerRadius = 16
-
-		if indexPath.row % 2 == 0 {
-			cell.backgroundColor = UIColor(red: 240/255, green: 244/255, blue: 247/255, alpha: 1)
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: StockCell.typeName, for: indexPath) as? StockCell else {
+			return UITableViewCell()
 		}
-		else {
-			cell.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
-		}
+		cell.configure(for: indexPath)
 		return cell
 	}
 
@@ -58,6 +52,11 @@ extension StocksViewController: UITableViewDataSource {
 	}
 }
 
+//extension StocksViewController: UITableViewDelegate{
+//	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//		80
+//	}
+//}
 
 
 extension NSObject{
@@ -65,4 +64,3 @@ extension NSObject{
 		String(describing: self)
 	}
 }
-
