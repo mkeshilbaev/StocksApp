@@ -43,7 +43,7 @@ final class StockCell: UITableViewCell {
 		let label = UILabel()
 		label.text = "+55 ₽ (1,15%)"
 		label.font = .systemFont(ofSize: 12)
-		label.textColor = UIColor(red: 36/255, green: 178/255, blue: 93/255, alpha: 1)
+		label.textColor = UIColor.StockCell.greenDayDeltaLabelBackground
 		return label
 	}()
 
@@ -87,8 +87,7 @@ final class StockCell: UITableViewCell {
 			iconImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
 			iconImageView.heightAnchor.constraint(equalToConstant: 52),
 			iconImageView.widthAnchor.constraint(equalToConstant: 52),
-			iconImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
-			iconImageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
+			iconImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
 
 			symbolNameLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 12),
 			symbolNameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 14),
@@ -130,5 +129,11 @@ extension UIColor {
 		static var whiteCellBackground: UIColor {
 			return UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
 		}
+		static var greenDayDeltaLabelBackground: UIColor {
+			return UIColor(red: 36/255, green: 178/255, blue: 93/255, alpha: 1)
+		}
 	}
 }
+
+
+

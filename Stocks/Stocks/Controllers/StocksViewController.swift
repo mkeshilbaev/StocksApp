@@ -24,7 +24,7 @@ final class StocksViewController: UIViewController {
 		view.backgroundColor = .white
 
 		tableView.dataSource = self
-//		tableView.delegate = self
+		tableView.delegate = self
 	}
 
 	private func setupSubviews(){
@@ -35,8 +35,6 @@ final class StocksViewController: UIViewController {
 		tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 	}
 }
-
-
 
 extension StocksViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -52,12 +50,11 @@ extension StocksViewController: UITableViewDataSource {
 	}
 }
 
-//extension StocksViewController: UITableViewDelegate{
-//	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//		80
-//	}
-//}
-
+extension StocksViewController: UITableViewDelegate{
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		68
+	}
+}
 
 extension NSObject{
 	static var typeName: String{
