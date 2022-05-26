@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "YNDX.png",
+      "filename" : "star.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "YNDX@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "YNDX@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

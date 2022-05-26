@@ -7,14 +7,13 @@
 
 import UIKit
 
-class StocksViewController: UIViewController {
+final class StocksViewController: UIViewController {
 
 	private lazy var tableView: UITableView = {
 		let tableView = UITableView()
 		tableView.translatesAutoresizingMaskIntoConstraints = false
 		tableView.separatorStyle = .none
 		tableView.register(StockCell.self, forCellReuseIdentifier: String(describing: StockCell.typeName))
-
 		return tableView
 	}()
 
@@ -25,6 +24,7 @@ class StocksViewController: UIViewController {
 		view.backgroundColor = .white
 
 		tableView.dataSource = self
+		tableView.delegate = self
 	}
 
 	private func setupSubviews(){
@@ -36,25 +36,28 @@ class StocksViewController: UIViewController {
 	}
 }
 
-
-
 extension StocksViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: StockCell.typeName, for: indexPath) as! StockCell
-
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: StockCell.typeName, for: indexPath) as? StockCell else {
+			return UITableViewCell()
+		}
+		cell.configure(for: indexPath)
 		return cell
 	}
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 10
+		return 20
 	}
 }
 
-
+extension StocksViewController: UITableViewDelegate{
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		76
+	}
+}
 
 extension NSObject{
 	static var typeName: String{
 		String(describing: self)
 	}
 }
-
