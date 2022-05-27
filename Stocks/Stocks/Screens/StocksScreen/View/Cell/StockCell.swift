@@ -12,7 +12,7 @@ final class StockCell: UITableViewCell {
 	private let containerView = UIView()
 
 	private lazy var iconImageView: UIImageView = {
-		let image = UIImageView(image: UIImage(named: "YNDX"))
+		let image = UIImageView()
 		image.layer.cornerRadius = 12
 		image.clipsToBounds = true
 		return image
@@ -20,28 +20,24 @@ final class StockCell: UITableViewCell {
 
 	private lazy var symbolNameLabel: UILabel = {
 		let label = UILabel()
-		label.text = "YNDX"
 		label.font = UIFont.boldSystemFont(ofSize: 18)
 		return label
 	}()
 
 	private lazy var companyNameLabel: UILabel = {
 		let label = UILabel()
-		label.text = "Yandex, LLC"
 		label.font = .systemFont(ofSize: 12)
 		return label
 	}()
 
 	private lazy var currentPriceLabel: UILabel = {
 		let label = UILabel()
-		label.text = "4 764,6 ₽"
 		label.font = UIFont.boldSystemFont(ofSize: 18)
 		return label
 	}()
 
 	private lazy var dayDeltaLabel: UILabel = {
 		let label = UILabel()
-		label.text = "+55 ₽ (1,15%)"
 		label.font = .systemFont(ofSize: 12)
 		label.textColor = UIColor.StockCell.greenDayDeltaLabelBackground
 		return label
@@ -108,7 +104,18 @@ final class StockCell: UITableViewCell {
 		])
 	}
 
-	func configure(for indexPath: IndexPath) {
+	func configure(with stock:Stock, for indexPath: IndexPath) {
+		symbolNameLabel.text = stock.symbol.uppercased()
+		companyNameLabel.text = stock.name
+		currentPriceLabel.text = "$\(stock.currentPrice.stringFormatted(by: .decimalFormatter))"
+		dayDeltaLabel.text = "$\(stock.priceChange24H.stringFormatted(by: .decimalFormatter)) (\(stock.priceChangePercentage24H.stringFormatted(by: .decimalFormatter))%)"
+		dayDeltaLabel.textColor = Double(stock.priceChange24H) >= 0 ? .stockPriceUp : .stockPriceDown
+
+
+		iconImageView.load(urlString: stock.image)
+
+
+
 		if indexPath.row % 2 == 0 {
 			containerView.backgroundColor = UIColor.StockCell.grayCellBackground
 		}
@@ -117,21 +124,6 @@ final class StockCell: UITableViewCell {
 		}
 		containerView.layer.cornerRadius = 16
 		selectionStyle = .none
-	}
-}
-
-
-extension UIColor {
-	fileprivate enum StockCell {
-		static var grayCellBackground: UIColor  {
-			return UIColor(red: 240/255, green: 244/255, blue: 247/255, alpha: 1)
-		}
-		static var whiteCellBackground: UIColor {
-			return UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
-		}
-		static var greenDayDeltaLabelBackground: UIColor {
-			return UIColor(red: 36/255, green: 178/255, blue: 93/255, alpha: 1)
-		}
 	}
 }
 
