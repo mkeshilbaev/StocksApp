@@ -17,12 +17,15 @@
 		2BCF45B1283F6E2D00D520C3 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF45B0283F6E2D00D520C3 /* NetworkService.swift */; };
 		2BCF45B3283F6E5000D520C3 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF45B2283F6E5000D520C3 /* HttpMethod.swift */; };
 		2BCF45B6283F813300D520C3 /* StocksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF45B5283F813300D520C3 /* StocksService.swift */; };
-		2BCF45B8283FA56B00D520C3 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF45B7283FA56B00D520C3 /* TabBarViewController.swift */; };
 		2BCF45BC283FB08600D520C3 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF45BB283FB08600D520C3 /* DetailsViewController.swift */; };
-		2BCF45C32840C13700D520C3 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF45C22840C13700D520C3 /* Stock.swift */; };
 		2BCF45C62840CFEC00D520C3 /* UIKit+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF45C52840CFEC00D520C3 /* UIKit+Extension.swift */; };
 		2BCF45C82840D07D00D520C3 /* Number+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF45C72840D07D00D520C3 /* Number+Extension.swift */; };
-		2BCF45CA2840D50D00D520C3 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF45C92840D50D00D520C3 /* String+Extension.swift */; };
+		2BDE228A2843CCA0003C38C4 /* StocksPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE22892843CCA0003C38C4 /* StocksPresenter.swift */; };
+		2BDE228D2843D8C4003C38C4 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE228C2843D8C4003C38C4 /* NSObject+Extension.swift */; };
+		2BDE228F2843D92D003C38C4 /* StocksRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE228E2843D92D003C38C4 /* StocksRouter.swift */; };
+		2BDE22912843D9CC003C38C4 /* StockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE22902843D9CC003C38C4 /* StockModel.swift */; };
+		2BDE22932843DA16003C38C4 /* StockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE22922843DA16003C38C4 /* StockResponse.swift */; };
+		2BDE22952843E15A003C38C4 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE22942843E15A003C38C4 /* ModuleBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,12 +41,15 @@
 		2BCF45B0283F6E2D00D520C3 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		2BCF45B2283F6E5000D520C3 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
 		2BCF45B5283F813300D520C3 /* StocksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksService.swift; sourceTree = "<group>"; };
-		2BCF45B7283FA56B00D520C3 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		2BCF45BB283FB08600D520C3 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
-		2BCF45C22840C13700D520C3 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
 		2BCF45C52840CFEC00D520C3 /* UIKit+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Extension.swift"; sourceTree = "<group>"; };
 		2BCF45C72840D07D00D520C3 /* Number+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+Extension.swift"; sourceTree = "<group>"; };
-		2BCF45C92840D50D00D520C3 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		2BDE22892843CCA0003C38C4 /* StocksPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksPresenter.swift; sourceTree = "<group>"; };
+		2BDE228C2843D8C4003C38C4 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		2BDE228E2843D92D003C38C4 /* StocksRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksRouter.swift; sourceTree = "<group>"; };
+		2BDE22902843D9CC003C38C4 /* StockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockModel.swift; sourceTree = "<group>"; };
+		2BDE22922843DA16003C38C4 /* StockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockResponse.swift; sourceTree = "<group>"; };
+		2BDE22942843E15A003C38C4 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,39 +82,37 @@
 		2B93E2D5283BFE34002B326B /* Stocks */ = {
 			isa = PBXGroup;
 			children = (
-				2BCF45C42840C24600D520C3 /* Extensions */,
+				2BDE228B2843D8A2003C38C4 /* Core */,
 				2BCF45A4283F665D00D520C3 /* Screens */,
-				2BCF45B7283FA56B00D520C3 /* TabBarViewController.swift */,
-				2B93E2EB283C0766002B326B /* App */,
-				2B93E2EA283C075A002B326B /* Additional files */,
-				2B93E2E4283BFE3A002B326B /* Info.plist */,
+				2B93E2EB283C0766002B326B /* Application */,
+				2B93E2EA283C075A002B326B /* Resources */,
 			);
 			path = Stocks;
 			sourceTree = "<group>";
 		};
-		2B93E2EA283C075A002B326B /* Additional files */ = {
+		2B93E2EA283C075A002B326B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				2B93E2DF283BFE3A002B326B /* Assets.xcassets */,
-				2B93E2E1283BFE3A002B326B /* LaunchScreen.storyboard */,
 			);
-			path = "Additional files";
+			path = Resources;
 			sourceTree = "<group>";
 		};
-		2B93E2EB283C0766002B326B /* App */ = {
+		2B93E2EB283C0766002B326B /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				2B93E2E1283BFE3A002B326B /* LaunchScreen.storyboard */,
+				2B93E2E4283BFE3A002B326B /* Info.plist */,
 				2B93E2D6283BFE34002B326B /* AppDelegate.swift */,
 			);
-			path = App;
+			path = Application;
 			sourceTree = "<group>";
 		};
 		2BCF45A4283F665D00D520C3 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				2BCF45AA283F66E500D520C3 /* Services */,
-				2BCF45BD283FBDDA00D520C3 /* StockDetailsScreen */,
 				2BCF45A5283F666C00D520C3 /* StocksScreen */,
+				2BCF45BD283FBDDA00D520C3 /* StockDetailsScreen */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -116,10 +120,10 @@
 		2BCF45A5283F666C00D520C3 /* StocksScreen */ = {
 			isa = PBXGroup;
 			children = (
-				2BCF45B4283F811700D520C3 /* Service */,
 				2BCF45A6283F667B00D520C3 /* Model */,
-				2BCF45A7283F668100D520C3 /* View */,
 				2BCF45A8283F668700D520C3 /* Presenter */,
+				2BCF45A7283F668100D520C3 /* View */,
+				2BCF45B4283F811700D520C3 /* Service */,
 			);
 			path = StocksScreen;
 			sourceTree = "<group>";
@@ -127,7 +131,7 @@
 		2BCF45A6283F667B00D520C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2BCF45C22840C13700D520C3 /* Stock.swift */,
+				2BDE22902843D9CC003C38C4 /* StockModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -144,6 +148,7 @@
 		2BCF45A8283F668700D520C3 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				2BDE22892843CCA0003C38C4 /* StocksPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -178,7 +183,9 @@
 		2BCF45B4283F811700D520C3 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				2BDE228E2843D92D003C38C4 /* StocksRouter.swift */,
 				2BCF45B5283F813300D520C3 /* StocksService.swift */,
+				2BDE22922843DA16003C38C4 /* StockResponse.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -212,9 +219,19 @@
 			children = (
 				2BCF45C52840CFEC00D520C3 /* UIKit+Extension.swift */,
 				2BCF45C72840D07D00D520C3 /* Number+Extension.swift */,
-				2BCF45C92840D50D00D520C3 /* String+Extension.swift */,
+				2BDE228C2843D8C4003C38C4 /* NSObject+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2BDE228B2843D8A2003C38C4 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				2BCF45AA283F66E500D520C3 /* Services */,
+				2BCF45C42840C24600D520C3 /* Extensions */,
+				2BDE22942843E15A003C38C4 /* ModuleBuilder.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,19 +304,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BDE228A2843CCA0003C38C4 /* StocksPresenter.swift in Sources */,
 				2BCF45AD283F6A3A00D520C3 /* Router.swift in Sources */,
+				2BDE22912843D9CC003C38C4 /* StockModel.swift in Sources */,
 				2B93E2DB283BFE34002B326B /* StocksViewController.swift in Sources */,
+				2BDE228D2843D8C4003C38C4 /* NSObject+Extension.swift in Sources */,
 				2BCF45B3283F6E5000D520C3 /* HttpMethod.swift in Sources */,
 				2BCF45C82840D07D00D520C3 /* Number+Extension.swift in Sources */,
 				2B93E2D7283BFE34002B326B /* AppDelegate.swift in Sources */,
-				2BCF45B8283FA56B00D520C3 /* TabBarViewController.swift in Sources */,
 				2B93E2EF283D1A18002B326B /* StockCell.swift in Sources */,
+				2BDE22952843E15A003C38C4 /* ModuleBuilder.swift in Sources */,
 				2BCF45B1283F6E2D00D520C3 /* NetworkService.swift in Sources */,
-				2BCF45CA2840D50D00D520C3 /* String+Extension.swift in Sources */,
 				2BCF45B6283F813300D520C3 /* StocksService.swift in Sources */,
 				2BCF45AF283F6E0B00D520C3 /* NetworkError.swift in Sources */,
-				2BCF45C32840C13700D520C3 /* Stock.swift in Sources */,
 				2BCF45C62840CFEC00D520C3 /* UIKit+Extension.swift in Sources */,
+				2BDE228F2843D92D003C38C4 /* StocksRouter.swift in Sources */,
+				2BDE22932843DA16003C38C4 /* StockResponse.swift in Sources */,
 				2BCF45BC283FB08600D520C3 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,7 +460,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Stocks/Info.plist;
+				INFOPLIST_FILE = Stocks/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -466,7 +486,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Stocks/Info.plist;
+				INFOPLIST_FILE = Stocks/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

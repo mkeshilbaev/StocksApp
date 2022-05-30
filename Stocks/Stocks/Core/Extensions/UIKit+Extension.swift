@@ -31,7 +31,6 @@ extension UIColor {
 	}
 }
 
-
 extension UIImageView {
 	func load(urlString: String){
 		guard let url = URL(string: urlString) else{ return }

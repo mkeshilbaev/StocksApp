@@ -7,16 +7,7 @@
 
 import Foundation
 
-
 extension NumberFormatter {
-	static let percentageFormatter: NumberFormatter = {
-		let formatter = NumberFormatter()
-		formatter.numberStyle = .percent
-		formatter.minimumFractionDigits = 0
-		formatter.maximumFractionDigits = 2
-		return formatter
-	}()
-
 	static let decimalFormatter: NumberFormatter = {
 		let formatter = NumberFormatter()
 		formatter.locale = .current
@@ -26,7 +17,6 @@ extension NumberFormatter {
 		return formatter
 	}()
 }
-
 
 extension Double {
 	func stringFormatted(by formatter: NumberFormatter) -> String {

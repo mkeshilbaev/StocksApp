@@ -1,8 +1,8 @@
 //
-//  Stock.swift
+//  StockResponse.swift
 //  Stocks
 //
-//  Created by Madi Keshilbayev on 27.05.2022.
+//  Created by Madi Keshilbayev on 29.05.2022.
 //
 
 import Foundation

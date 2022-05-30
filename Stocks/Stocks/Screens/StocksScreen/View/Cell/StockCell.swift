@@ -104,17 +104,13 @@ final class StockCell: UITableViewCell {
 		])
 	}
 
-	func configure(with stock:Stock, for indexPath: IndexPath) {
-		symbolNameLabel.text = stock.symbol.uppercased()
-		companyNameLabel.text = stock.name
-		currentPriceLabel.text = "$\(stock.currentPrice.stringFormatted(by: .decimalFormatter))"
-		dayDeltaLabel.text = "$\(stock.priceChange24H.stringFormatted(by: .decimalFormatter)) (\(stock.priceChangePercentage24H.stringFormatted(by: .decimalFormatter))%)"
-		dayDeltaLabel.textColor = Double(stock.priceChange24H) >= 0 ? .stockPriceUp : .stockPriceDown
-
-
-		iconImageView.load(urlString: stock.image)
-
-
+	func configure(with model: StockModelProtocol, for indexPath: IndexPath) {
+		symbolNameLabel.text = model.symbol
+		companyNameLabel.text = model.name
+		currentPriceLabel.text = model.price
+		dayDeltaLabel.text = model.change
+		dayDeltaLabel.textColor = model.changeColor
+		iconImageView.load(urlString: model.iconUrl)
 
 		if indexPath.row % 2 == 0 {
 			containerView.backgroundColor = UIColor.StockCell.grayCellBackground

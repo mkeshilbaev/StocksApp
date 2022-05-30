@@ -8,11 +8,21 @@
 import UIKit
 
 class DetailsViewController: UIViewController {
+	private let model: StockModelProtocol
+
+	internal init(model: StockModelProtocol) {
+		self.model = model
+		super.init(nibName: nil, bundle: nil)
+	}
+
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
 
 	private lazy var currentPriceLabel: UILabel = {
 		let label = UILabel()
 		label.font = UIFont.boldSystemFont(ofSize: 28)
-		label.text = "$131.93"
+		label.text = model.price
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
@@ -20,40 +30,34 @@ class DetailsViewController: UIViewController {
 	private lazy var dayDeltaLabel: UILabel = {
 		let label = UILabel()
 		label.font = .systemFont(ofSize: 12)
-		label.textColor = UIColor(red: 36/255, green: 178/255, blue: 93/255, alpha: 1)
-		label.text = "+$0.12 (1,15%)"
+		label.text = model.change
+		label.textColor = model.changeColor
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		view.backgroundColor = .white
 		setupNavigationBarItems()
 		setupViews()
 		setupContraints()
     }
 
 	 func setupNavigationBarItems(){
-		createCustomNavigationBar()
-
 		let favouriteButton = createCustomButton(imageName: "favourite",
 												 selector: #selector(addToFavouriteButtonTapped))
 		let goBackButton = createCustomButton(imageName: "back",
 											  selector: #selector(goBackButtonTapped))
-		let customTitleView = createCustomTitleView(symbol: "BTC",
-													companyName: "Bitcoin")
+		let customTitleView = createCustomTitleView(symbol: model.symbol,
+													 companyName: model.name)
 
 		navigationItem.titleView = customTitleView
 		navigationItem.rightBarButtonItem = favouriteButton
 		navigationItem.leftBarButtonItem = goBackButton
 	}
 
-	func configureData(){
-
-	}
-
 	private func setupViews(){
+		view.backgroundColor = .white
 		view.addSubview(currentPriceLabel)
 		view.addSubview(dayDeltaLabel)
 	}
@@ -80,28 +84,34 @@ class DetailsViewController: UIViewController {
 
 }
 
-
 extension UIViewController {
-
-	func createCustomNavigationBar(){
-		navigationController?.navigationBar.barTintColor = UIColor.lightGray
-	}
-
 	func createCustomTitleView(symbol: String, companyName: String) -> UIView {
-		let view = UIView()
-		view.frame = CGRect(x: 0, y: 0, width: 40, height: 44)
-
 		let symbolLabel = UILabel()
 		symbolLabel.text = symbol
-		symbolLabel.font = UIFont.systemFont(ofSize: 18)
-		symbolLabel.frame = CGRect(x: 0, y: 42, width: symbolLabel.intrinsicContentSize.width, height: 24)
-		view.addSubview(symbolLabel)
+		symbolLabel.font = UIFont.boldSystemFont(ofSize: 18)
+		symbolLabel.frame = CGRect(x: 0, y: 42, width: 0, height: 0)
+		symbolLabel.sizeToFit()
 
 		let companyNameLabel = UILabel()
 		companyNameLabel.text = companyName
 		companyNameLabel.font = UIFont.systemFont(ofSize: 12)
-		companyNameLabel.frame = CGRect(x: 0, y: 70, width: companyNameLabel.intrinsicContentSize.width, height: 16)
+		companyNameLabel.frame = CGRect(x: 0, y: 70, width: 0, height: 0)
+		companyNameLabel.sizeToFit()
+
+		let view = UIView()
+		view.frame = CGRect(x: 0, y: 70, width: max(symbolLabel.frame.size.width, companyNameLabel.frame.size.width), height: 44)
+		view.addSubview(symbolLabel)
 		view.addSubview(companyNameLabel)
+
+		let widthDiff = companyNameLabel.frame.size.width - symbolLabel.frame.size.width
+
+		if widthDiff < 0 {
+			let newX = widthDiff / 2
+			companyNameLabel.frame.origin.x = abs(newX)
+		} else {
+			let newX = widthDiff / 2
+			symbolLabel.frame.origin.x = newX
+		}
 
 		return view
 	}
