@@ -8,7 +8,6 @@
 import UIKit
 
 final class StocksViewController: UIViewController {
-
 	private let presenter: StocksPresenterProtocol
 
 	init(presenter: StocksPresenterProtocol) {

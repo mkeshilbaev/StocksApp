@@ -53,6 +53,4 @@ final class StocksPresenter: StocksPresenterProtocol {
 	func model(for indexPath: IndexPath) -> StockModelProtocol {
 		stocks[indexPath.row]
 	}
-
-
 }
