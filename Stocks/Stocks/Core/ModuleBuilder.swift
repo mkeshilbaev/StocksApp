@@ -15,6 +15,8 @@ final class ModuleBuilder {
 		Network()
 	}()
 
+	lazy var favouritesService: FavouritesServiceProtocol = FavouritesLocalService()
+
 	static let shared: ModuleBuilder = .init()
 
 	func stockService() -> StocksServiceProtocol {
@@ -29,8 +31,9 @@ final class ModuleBuilder {
 		return view
 	}
 
-	func favouritesVC() -> UIViewController {
-		UIViewController()
+	func favouritesModule() -> UIViewController {
+		let view = FavouritesViewController()
+		return view
 	}
 
 	func searchVC() -> UIViewController {
@@ -43,7 +46,7 @@ final class ModuleBuilder {
 		let stocksVC = stockModule()
 		stocksVC.tabBarItem = UITabBarItem(title: "Stocks", image: UIImage(named: "diagram.active"), tag: 0)
 
-		let favouritesVC = favouritesVC()
+		let favouritesVC = favouritesModule()
 		favouritesVC.tabBarItem = UITabBarItem(title: "Favourites", image: UIImage(named: "star.inactive"), tag: 1)
 
 		let searchVC = searchVC()

@@ -51,9 +51,9 @@ class DetailsViewController: UIViewController {
 		let customTitleView = createCustomTitleView(symbol: model.symbol,
 													 companyName: model.name)
 
-		navigationItem.titleView = customTitleView
-		navigationItem.rightBarButtonItem = favouriteButton
-		navigationItem.leftBarButtonItem = goBackButton
+		 navigationItem.titleView = customTitleView
+		 navigationItem.rightBarButtonItem = favouriteButton
+		 navigationItem.leftBarButtonItem = goBackButton
 	}
 
 	private func setupViews(){
