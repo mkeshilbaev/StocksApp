@@ -8,7 +8,7 @@
 import UIKit
 
 final class StockCell: UITableViewCell {
-
+	private var favouriteAction: (() -> Void)?
 	private let containerView = UIView()
 
 	private lazy var iconImageView: UIImageView = {
@@ -47,18 +47,29 @@ final class StockCell: UITableViewCell {
 		let button = UIButton(type: .custom)
 		button.setTitle("Star", for: .normal)
 		button.setImage(UIImage(named:"star"), for: .normal)
+		button.setImage(UIImage(named:"star.filled"), for: .selected)
 		button.imageView?.contentMode = .scaleAspectFit
+		button.addTarget(self, action: #selector(favouriteButtonTap), for: .touchUpInside)
 		return button
 	}()
-
 
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 		setupViews()
 	}
 
+	override func prepareForReuse() {
+		super.prepareForReuse()
+		favouriteAction = nil
+	}
+
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
+	}
+
+	@objc func favouriteButtonTap(){
+		addToFavouriteButton.isSelected.toggle()
+		favouriteAction?()
 	}
 
 	private func setupViews(){
@@ -71,6 +82,31 @@ final class StockCell: UITableViewCell {
 		containerView.translatesAutoresizingMaskIntoConstraints = false
 
 		setupContraints()
+	}
+
+	func configure(with model: StockModelProtocol, for indexPath: IndexPath) {
+		symbolNameLabel.text = model.symbol
+		companyNameLabel.text = model.name
+		currentPriceLabel.text = model.price
+		dayDeltaLabel.text = model.change
+		dayDeltaLabel.textColor = model.changeColor
+		iconImageView.load(urlString: model.iconUrl)
+
+		if indexPath.row % 2 == 0 {
+			containerView.backgroundColor = UIColor.StockCell.grayCellBackground
+		}
+		else {
+			containerView.backgroundColor = UIColor.StockCell.whiteCellBackground
+		}
+		containerView.layer.cornerRadius = 16
+		selectionStyle = .none
+
+		addToFavouriteButton.isSelected = model.isFavourite
+
+		favouriteAction = {
+			model.setFavourite()
+		}
+
 	}
 
 	private func setupContraints(){
@@ -102,24 +138,6 @@ final class StockCell: UITableViewCell {
 			dayDeltaLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -12),
 			dayDeltaLabel.centerYAnchor.constraint(equalTo: companyNameLabel.centerYAnchor)
 		])
-	}
-
-	func configure(with model: StockModelProtocol, for indexPath: IndexPath) {
-		symbolNameLabel.text = model.symbol
-		companyNameLabel.text = model.name
-		currentPriceLabel.text = model.price
-		dayDeltaLabel.text = model.change
-		dayDeltaLabel.textColor = model.changeColor
-		iconImageView.load(urlString: model.iconUrl)
-
-		if indexPath.row % 2 == 0 {
-			containerView.backgroundColor = UIColor.StockCell.grayCellBackground
-		}
-		else {
-			containerView.backgroundColor = UIColor.StockCell.whiteCellBackground
-		}
-		containerView.layer.cornerRadius = 16
-		selectionStyle = .none
 	}
 }
 

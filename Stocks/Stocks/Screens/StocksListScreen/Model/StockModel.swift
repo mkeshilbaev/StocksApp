@@ -17,13 +17,18 @@ protocol StockModelProtocol {
 	var change: String { get }
 	var changeColor: UIColor { get }
 	var isFavourite: Bool { get set }
+
+	func setFavourite()
 }
 
 final class StockModel: StockModelProtocol {
 	private let stock: Stock
+	private let favouritesService: FavouritesServiceProtocol
 
 	init(stock: Stock) {
 		self.stock = stock
+		favouritesService = Assembly.assembler.favouritesService
+		isFavourite = favouritesService.isFavourite(for: id)
 	}
 
 	var id: String {
@@ -55,4 +60,14 @@ final class StockModel: StockModelProtocol {
 	}
 
 	var isFavourite: Bool = false
+
+	func setFavourite() {
+		isFavourite.toggle()
+
+		if isFavourite {
+			favouritesService.save(id: id)
+		} else {
+			favouritesService.remove(id: id)
+		}
+	}
 }

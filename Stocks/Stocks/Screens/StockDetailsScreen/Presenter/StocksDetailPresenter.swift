@@ -14,41 +14,47 @@ protocol StocksDetailViewProtocol: AnyObject {
 }
 
 protocol StocksDetailPresenterProtocol {
-	var view: StocksDetailViewProtocol? { get set }
+	var titleModel: DetailTitleView.TilteModel { get }
+	var favouriteButtonIsSelected: Bool { get }
 
 	func loadView()
-	func model(for indexPath: IndexPath) -> StockDetailModelProtocol
+	func favouriteButtonTapped()
 }
 
 final class StocksDetailPresenter: StocksDetailPresenterProtocol {
-	private let service: StocksDetailServiceProtocol
-	private var stockDetails: [StockDetailModelProtocol] = []
-
-	init(service: StocksDetailServiceProtocol) {
-		self.service = service
-	}
+	private let model: StockModelProtocol
+	private let service: ChartsServiceProtocol
 
 	weak var view: StocksDetailViewProtocol?
 
+	lazy var titleModel: DetailTitleView.TilteModel = {
+		.from(stockModel: model)
+	}()
+
+	var favouriteButtonIsSelected: Bool {
+		model.isFavourite
+	}
+
+	init(model: StockModelProtocol, service: ChartsServiceProtocol) {
+		self.model = model
+		self.service = service
+	}
+
 	func loadView() {
-		// идем в сеть и показываем лоадер
 		view?.updateView(withLoader: true)
-
-		service.getStocksDetail { [weak self] result in
-			// возвращаемся с данными и убираем лоадер
+		service.getCharts(id: model.id) { [weak self] result in
 			self?.view?.updateView(withLoader: false)
-
 			switch result {
-			case .success(let stockDetails):
-				self?.stockDetails = stockDetails.map { StockDetailModel(stockDetail: $0)}
+			case .success(let charts):
 				self?.view?.updateView()
+				print("Data from prices url - ", charts)
 			case .failure(let error):
 				self?.view?.updateView(withError: error.localizedDescription)
 			}
 		}
 	}
 
-	func model(for indexPath: IndexPath) -> StockDetailModelProtocol {
-		stockDetails[indexPath.row]
+	func favouriteButtonTapped() {
+		model.setFavourite()
 	}
 }
