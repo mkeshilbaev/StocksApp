@@ -27,7 +27,7 @@ final class StockModel: StockModelProtocol {
 
 	init(stock: Stock) {
 		self.stock = stock
-		favouritesService = ModuleBuilder.shared.favouritesService
+		favouritesService = Assembly.assembler.favouritesService
 		isFavourite = favouritesService.isFavourite(for: id)
 	}
 

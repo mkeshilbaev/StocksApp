@@ -8,23 +8,18 @@
 import Foundation
 import UIKit
 
-final class ModuleBuilder {
+final class Assembly {
+	static let assembler: Assembly = .init()
+	let favouritesService: FavouritesServiceProtocol = FavouritesLocalService()
+
 	private init() {}
 
-	private lazy var network: NetworkService = {
-		Network()
-	}()
+	private lazy var network: NetworkService = Network()
+	private lazy var stocksService: StocksServiceProtocol = StocksService(network: network)
+	private lazy var chartsService: ChartsServiceProtocol = ChartsService(network: network)
 
-	lazy var favouritesService: FavouritesServiceProtocol = FavouritesLocalService()
-
-	static let shared: ModuleBuilder = .init()
-
-	func stockService() -> StocksServiceProtocol {
-		StocksService(client: network)
-	}
-	
-	func stockModule() -> UIViewController {
-		let presenter = StocksPresenter(service: stockService())
+	func stocksModule() -> UIViewController {
+		let presenter = StocksPresenter(service: stocksService)
 		let view = StocksViewController(presenter: presenter)
 		presenter.view = view
 
@@ -43,7 +38,7 @@ final class ModuleBuilder {
 	func tabBarController() -> UIViewController {
 		let tabBar = UITabBarController()
 
-		let stocksVC = stockModule()
+		let stocksVC = stocksModule()
 		stocksVC.tabBarItem = UITabBarItem(title: "Stocks", image: UIImage(named: "diagram.active"), tag: 0)
 
 		let favouritesVC = favouritesModule()
@@ -58,6 +53,12 @@ final class ModuleBuilder {
 		return tabBar
 	}
 
+	func detailVC(model: StockModelProtocol) -> UIViewController {
+		let presenter = StocksDetailPresenter(model: model, service: chartsService)
+		let view = DetailsViewController(presenter: presenter)
+		presenter.view = view
+		return view
+	}
 }
 
 
