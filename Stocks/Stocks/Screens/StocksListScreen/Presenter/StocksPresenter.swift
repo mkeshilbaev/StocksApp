@@ -17,9 +17,11 @@ protocol StocksViewProtocol: AnyObject {
 protocol StocksPresenterProtocol {
 	var view: StocksViewProtocol? { get set }
 	var itemsCount: Int { get }
+	var favouriteStocksCount: Int { get }
 
 	func loadView()
 	func model(for indexPath: IndexPath) -> StockModelProtocol
+	func modelFavourites(for indexPath: IndexPath) -> StockModelProtocol 
 }
 
 final class StocksPresenter: StocksPresenterProtocol {
@@ -28,6 +30,10 @@ final class StocksPresenter: StocksPresenterProtocol {
 
 	var itemsCount: Int {
 		stocks.count
+	}
+
+	var favouriteStocksCount: Int {
+		stocks.filter { $0.isFavourite }.count
 	}
 
 	init(service: StocksServiceProtocol) {
@@ -57,6 +63,10 @@ final class StocksPresenter: StocksPresenterProtocol {
 
 	func model(for indexPath: IndexPath) -> StockModelProtocol {
 		stocks[indexPath.row]
+	}
+
+	func modelFavourites(for indexPath: IndexPath) -> StockModelProtocol {
+		stocks.filter { $0.isFavourite }[indexPath.row]
 	}
 }
 

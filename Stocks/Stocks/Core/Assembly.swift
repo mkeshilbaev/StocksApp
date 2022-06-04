@@ -27,7 +27,10 @@ final class Assembly {
 	}
 
 	func favouritesModule() -> UIViewController {
-		let view = FavouritesViewController()
+		let presenter = StocksPresenter(service: stocksService)
+		let view = FavouritesViewController(presenter: presenter)
+		presenter.view = view
+
 		return view
 	}
 
