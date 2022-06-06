@@ -14,7 +14,7 @@ protocol StocksDetailViewProtocol: AnyObject {
 }
 
 protocol StocksDetailPresenterProtocol {
-	var titleModel: DetailTitleView.TilteModel { get }
+	var titleModel: DetailTitleView.TitleModel { get }
 	var favouriteButtonIsSelected: Bool { get }
 	
 	func loadView()
@@ -24,10 +24,10 @@ protocol StocksDetailPresenterProtocol {
 final class StocksDetailPresenter: StocksDetailPresenterProtocol {
 	private let model: StockModelProtocol
 	private let service: ChartsServiceProtocol
-	
+
 	weak var view: StocksDetailViewProtocol?
 	
-	lazy var titleModel: DetailTitleView.TilteModel = {
+	lazy var titleModel: DetailTitleView.TitleModel = {
 		.from(stockModel: model)
 	}()
 	
@@ -45,10 +45,9 @@ final class StocksDetailPresenter: StocksDetailPresenterProtocol {
 		service.getCharts(id: model.id) { [weak self] result in
 			self?.view?.updateView(withLoader: false)
 			switch result {
-			case .success(let charts):
+			case let .success(charts):
 				self?.view?.updateView()
-				print("Data from prices url - ", charts)
-			case .failure(let error):
+			case let .failure(error):
 				self?.view?.updateView(withError: error.localizedDescription)
 			}
 		}

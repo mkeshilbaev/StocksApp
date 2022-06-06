@@ -46,10 +46,12 @@ class FavouritesViewController: UIViewController {
 
 	private func setupSubviews(){
 		view.addSubview(tableView)
-		tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
-		tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
-		tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-		tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+		NSLayoutConstraint.activate([
+			tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+			tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+			tableView.topAnchor.constraint(equalTo: view.topAnchor),
+			tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+		])
 	}
 }
 
@@ -93,5 +95,3 @@ extension FavouritesViewController: UITableViewDataSource, UITableViewDelegate {
 		navigationController?.pushViewController(detailVC, animated: true)
 	}
 }
-
-

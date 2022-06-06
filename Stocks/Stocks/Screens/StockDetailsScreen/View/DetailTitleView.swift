@@ -8,25 +8,25 @@
 import UIKit
 
 final class DetailTitleView: UIView {
-	struct TilteModel {
+	struct TitleModel {
 		let symbol: String
 		let name: String
 		
-		static func from(stockModel model: StockModelProtocol) -> TilteModel {
-			TilteModel(symbol: model.symbol, name: model.name)
+		static func from(stockModel model: StockModelProtocol) -> TitleModel {
+			TitleModel(symbol: model.symbol, name: model.name)
 		}
 	}
 	
 	private lazy var symbolLabel: UILabel = {
 		let label = UILabel()
-		label.font = .systemFont(ofSize: 18)
+		label.font = .boldSystemFont(ofSize: 18)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
 	
 	private lazy var nameLabel: UILabel = {
 		let label = UILabel()
-		label.font = .systemFont(ofSize: 14)
+		label.font = .systemFont(ofSize: 12)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
@@ -41,7 +41,7 @@ final class DetailTitleView: UIView {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	func configure(with model: TilteModel) {
+	func configure(with model: TitleModel) {
 		symbolLabel.text = model.symbol
 		nameLabel.text = model.name
 	}
