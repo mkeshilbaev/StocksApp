@@ -75,17 +75,3 @@ final class DetailsViewController: UIViewController {
 		navigationController?.popViewController(animated: true)
 	}
 }
-
-extension DetailsViewController: StocksDetailViewProtocol {
-	func updateView(withLoader isLoading: Bool) {
-
-	}
-
-	func updateView(withError message: String) {
-
-	}
-
-	func updateView() {
-
-	}
-}

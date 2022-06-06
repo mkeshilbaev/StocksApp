@@ -95,8 +95,6 @@
 		2B0426F128479F6000CFA56C /* FavouritesScreen */ = {
 			isa = PBXGroup;
 			children = (
-				2B0426F428479F8A00CFA56C /* Presenter */,
-				2B0426F328479F7C00CFA56C /* Model */,
 				2B0426F228479F7700CFA56C /* View */,
 			);
 			path = FavouritesScreen;
@@ -108,20 +106,6 @@
 				2B0426F528479FA400CFA56C /* FavouritesViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		2B0426F328479F7C00CFA56C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		2B0426F428479F8A00CFA56C /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
 			sourceTree = "<group>";
 		};
 		2B93E2CA283BFE34002B326B = {

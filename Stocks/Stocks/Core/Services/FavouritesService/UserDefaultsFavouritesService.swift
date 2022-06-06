@@ -16,7 +16,7 @@ final class FavouritesService: FavouritesServiceProtocol {
 			  let ids = try? JSONDecoder().decode([String].self, from: data) else {
 			return []
 		}
-
+		
 		return ids
 	}()
 

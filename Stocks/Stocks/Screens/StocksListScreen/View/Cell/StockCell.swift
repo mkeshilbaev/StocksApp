@@ -64,7 +64,7 @@ final class StockCell: UITableViewCell {
 	}
 
 	required init?(coder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
+		fatalError("init(coder:) has not been implemented...")
 	}
 
 	@objc func favouriteButtonTap(){
@@ -92,7 +92,7 @@ final class StockCell: UITableViewCell {
 		dayDeltaLabel.textColor = model.changeColor
 		iconImageView.load(urlString: model.iconUrl)
 
-		if indexPath.row % 2 == 0 {
+		if indexPath.row.isMultiple(of: 2) {
 			containerView.backgroundColor = UIColor.StockCell.grayCellBackground
 		}
 		else {

@@ -22,12 +22,13 @@ final class Assembly {
 		let presenter = StocksPresenter(service: stocksService)
 		let view = StocksViewController(presenter: presenter)
 		presenter.view = view
-
 		return view
 	}
 
 	func favouritesModule() -> UIViewController {
-		let view = FavouritesViewController()
+		let presenter = StocksPresenter(service: stocksService)
+		let view = FavouritesViewController(presenter: presenter)
+		presenter.view = view
 		return view
 	}
 
@@ -43,7 +44,7 @@ final class Assembly {
 
 		let favouritesVC = favouritesModule()
 		favouritesVC.tabBarItem = UITabBarItem(title: "Favourites", image: UIImage(named: "star.inactive"), tag: 1)
-
+		
 		let searchVC = searchVC()
 		searchVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(named: "loop.inactive"), tag: 2)
 
@@ -56,7 +57,7 @@ final class Assembly {
 	func detailVC(model: StockModelProtocol) -> UIViewController {
 		let presenter = StocksDetailPresenter(model: model, service: chartsService)
 		let view = DetailsViewController(presenter: presenter)
-		presenter.view = view
+		presenter.view = view as? StocksDetailViewProtocol
 		return view
 	}
 }

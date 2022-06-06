@@ -14,11 +14,11 @@ protocol ChartsServiceProtocol {
 
 final class ChartsService: ChartsServiceProtocol {
 	private let network: NetworkService
-
+	
 	init(network: NetworkService) {
 		self.network = network
 	}
-
+	
 	func getCharts(id: String, currency: String, days: String, isDaily: Bool, completion: @escaping (Result<Charts, NetworkError>) -> Void) {
 		network.execute(with: StockRouter.charts(id: id, currency: currency, days: days, isDaily: isDaily), completion: completion)
 	}
