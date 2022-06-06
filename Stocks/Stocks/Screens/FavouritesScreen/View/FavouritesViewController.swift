@@ -1,14 +1,13 @@
 //
-//  StocksViewController.swift
+//  FavouritesViewController.swift
 //  Stocks
 //
-//  Created by Madi Keshilbayev on 23.05.2022.
+//  Created by Madi Keshilbayev on 01.06.2022.
 //
 
 import UIKit
 
-final class StocksViewController: UIViewController {
-
+class FavouritesViewController: UIViewController {
 	private let presenter: StocksPresenterProtocol
 
 	init(presenter: StocksPresenterProtocol) {
@@ -40,7 +39,7 @@ final class StocksViewController: UIViewController {
 
 	private func setupViews(){
 		view.backgroundColor = .white
-		title = "Stocks"
+		title = "Favourites"
 		navigationItem.largeTitleDisplayMode = .always
 		navigationController?.navigationBar.prefersLargeTitles = true
 	}
@@ -54,9 +53,12 @@ final class StocksViewController: UIViewController {
 	}
 }
 
-extension StocksViewController: StocksViewProtocol {
+extension FavouritesViewController: StocksViewProtocol {
 	func updateView() {
 		tableView.reloadData()
+	}
+	func updateCell(for indexPath: IndexPath) {
+		tableView.reloadRows(at: [indexPath], with: .none)
 	}
 
 	func updateView(withLoader isLoading: Bool) {
@@ -68,35 +70,28 @@ extension StocksViewController: StocksViewProtocol {
 	}
 }
 
-
-extension StocksViewController: UITableViewDataSource {
+extension FavouritesViewController: UITableViewDataSource, UITableViewDelegate {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: StockCell.typeName, for: indexPath) as? StockCell else {
 			return UITableViewCell()
 		}
-		cell.configure(with: presenter.model(for: indexPath), for: indexPath)
+		cell.configure(with: presenter.modelFavourites(for: indexPath), for: indexPath)
 		return cell
 	}
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return presenter.itemsCount
+		return presenter.favouriteStocksCount
 	}
-}
 
-extension StocksViewController: UITableViewDelegate{
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		76
 	}
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let detailVC = DetailsViewController(model: presenter.model(for: indexPath))
-		let navigationController = UINavigationController(rootViewController: detailVC)
-		navigationController.modalPresentationStyle = .fullScreen
-		present(navigationController, animated: true)
+		let model = presenter.model(for: indexPath)
+		let detailVC = Assembly.assembler.detailVC(model: model)
+		navigationController?.pushViewController(detailVC, animated: true)
 	}
 }
-
-
-
 
 
