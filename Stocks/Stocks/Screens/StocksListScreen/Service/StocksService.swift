@@ -19,13 +19,13 @@ protocol StocksServiceProtocol {
 }
 
 final class StocksService: StocksServiceProtocol {
-
+	
 	private let network: NetworkService
-
+	
 	init(network: NetworkService) {
 		self.network = network
 	}
-
+	
 	func getStocks(currency: String, count: String, completion: @escaping (Result<[StockModelProtocol], NetworkError>) -> Void) {
 		network.execute(with: StockRouter.stocks(currency: currency, count: count)) { [weak self] (result: Result<[Stock], NetworkError>) in
 			guard let self = self else { return }
@@ -37,7 +37,7 @@ final class StocksService: StocksServiceProtocol {
 			}
 		}
 	}
-
+	
 	private func stockModels(for stocks: [Stock]) -> [StockModelProtocol] {
 		stocks.map { StockModel(stock: $0) }
 	}
@@ -47,7 +47,7 @@ extension StocksServiceProtocol {
 	func getStocks(currency: String, completion: @escaping (Result<[StockModelProtocol], NetworkError>) -> Void) {
 		getStocks(currency: currency, count: Constants.count, completion: completion)
 	}
-
+	
 	func getStocks(completion: @escaping (Result<[StockModelProtocol], NetworkError>) -> Void) {
 		getStocks(currency: Constants.currency, completion: completion)
 	}

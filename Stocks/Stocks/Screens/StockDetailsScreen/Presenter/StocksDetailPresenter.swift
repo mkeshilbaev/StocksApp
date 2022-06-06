@@ -16,7 +16,7 @@ protocol StocksDetailViewProtocol: AnyObject {
 protocol StocksDetailPresenterProtocol {
 	var titleModel: DetailTitleView.TilteModel { get }
 	var favouriteButtonIsSelected: Bool { get }
-
+	
 	func loadView()
 	func favouriteButtonTapped()
 }
@@ -24,22 +24,22 @@ protocol StocksDetailPresenterProtocol {
 final class StocksDetailPresenter: StocksDetailPresenterProtocol {
 	private let model: StockModelProtocol
 	private let service: ChartsServiceProtocol
-
+	
 	weak var view: StocksDetailViewProtocol?
-
+	
 	lazy var titleModel: DetailTitleView.TilteModel = {
 		.from(stockModel: model)
 	}()
-
+	
 	var favouriteButtonIsSelected: Bool {
 		model.isFavourite
 	}
-
+	
 	init(model: StockModelProtocol, service: ChartsServiceProtocol) {
 		self.model = model
 		self.service = service
 	}
-
+	
 	func loadView() {
 		view?.updateView(withLoader: true)
 		service.getCharts(id: model.id) { [weak self] result in
@@ -53,7 +53,7 @@ final class StocksDetailPresenter: StocksDetailPresenterProtocol {
 			}
 		}
 	}
-
+	
 	func favouriteButtonTapped() {
 		model.setFavourite()
 	}

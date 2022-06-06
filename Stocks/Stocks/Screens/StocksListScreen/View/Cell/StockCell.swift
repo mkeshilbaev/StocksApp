@@ -92,7 +92,7 @@ final class StockCell: UITableViewCell {
 		dayDeltaLabel.textColor = model.changeColor
 		iconImageView.load(urlString: model.iconUrl)
 
-		if indexPath.row % 2 == 0 {
+		if indexPath.row.isMultiple(of: 2) {
 			containerView.backgroundColor = UIColor.StockCell.grayCellBackground
 		}
 		else {
