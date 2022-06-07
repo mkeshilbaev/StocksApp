@@ -106,7 +106,6 @@ final class StockCell: UITableViewCell {
 		favouriteAction = {
 			model.setFavourite()
 		}
-
 	}
 
 	private func setupContraints(){

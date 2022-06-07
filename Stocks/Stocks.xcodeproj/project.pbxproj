@@ -27,6 +27,7 @@
 		2BCF45BC283FB08600D520C3 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF45BB283FB08600D520C3 /* DetailsViewController.swift */; };
 		2BCF45C62840CFEC00D520C3 /* UIKit+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF45C52840CFEC00D520C3 /* UIKit+Extension.swift */; };
 		2BCF45C82840D07D00D520C3 /* Number+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF45C72840D07D00D520C3 /* Number+Extension.swift */; };
+		2BD420C4284E6A2800750354 /* FavouriteStocksPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD420C3284E6A2800750354 /* FavouriteStocksPresenter.swift */; };
 		2BDE228A2843CCA0003C38C4 /* StocksPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE22892843CCA0003C38C4 /* StocksPresenter.swift */; };
 		2BDE228D2843D8C4003C38C4 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE228C2843D8C4003C38C4 /* NSObject+Extension.swift */; };
 		2BDE228F2843D92D003C38C4 /* StocksRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE228E2843D92D003C38C4 /* StocksRouter.swift */; };
@@ -60,6 +61,7 @@
 		2BCF45BB283FB08600D520C3 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		2BCF45C52840CFEC00D520C3 /* UIKit+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Extension.swift"; sourceTree = "<group>"; };
 		2BCF45C72840D07D00D520C3 /* Number+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+Extension.swift"; sourceTree = "<group>"; };
+		2BD420C3284E6A2800750354 /* FavouriteStocksPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteStocksPresenter.swift; sourceTree = "<group>"; };
 		2BDE22892843CCA0003C38C4 /* StocksPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksPresenter.swift; sourceTree = "<group>"; };
 		2BDE228C2843D8C4003C38C4 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		2BDE228E2843D92D003C38C4 /* StocksRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksRouter.swift; sourceTree = "<group>"; };
@@ -84,8 +86,8 @@
 		2B0426EE2847868B00CFA56C /* FavouritesService */ = {
 			isa = PBXGroup;
 			children = (
-				2B0426F92849F8D500CFA56C /* FavouritesUpdateService.swift */,
 				2B0426EF284786C000CFA56C /* FavouritesService.swift */,
+				2B0426F92849F8D500CFA56C /* FavouritesUpdateService.swift */,
 				2B0426FB2849F9B700CFA56C /* FileManagerFavouritesService.swift */,
 				2B0426FD2849F9E200CFA56C /* UserDefaultsFavouritesService.swift */,
 			);
@@ -95,6 +97,7 @@
 		2B0426F128479F6000CFA56C /* FavouritesScreen */ = {
 			isa = PBXGroup;
 			children = (
+				2BD420C2284E6A0C00750354 /* Presenter */,
 				2B0426F228479F7700CFA56C /* View */,
 			);
 			path = FavouritesScreen;
@@ -266,6 +269,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		2BD420C2284E6A0C00750354 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2BD420C3284E6A2800750354 /* FavouriteStocksPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		2BDE228B2843D8A2003C38C4 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -380,6 +391,7 @@
 				2BDE229C2844D48A003C38C4 /* ChartsResponse.swift in Sources */,
 				2BCF45B6283F813300D520C3 /* StocksService.swift in Sources */,
 				2BCF45AF283F6E0B00D520C3 /* NetworkError.swift in Sources */,
+				2BD420C4284E6A2800750354 /* FavouriteStocksPresenter.swift in Sources */,
 				2B0426FE2849F9E200CFA56C /* UserDefaultsFavouritesService.swift in Sources */,
 				2B0426F82848E70100CFA56C /* DetailTitleView.swift in Sources */,
 				2BCF45C62840CFEC00D520C3 /* UIKit+Extension.swift in Sources */,

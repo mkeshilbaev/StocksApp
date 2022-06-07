@@ -48,6 +48,7 @@ final class StocksViewController: UIViewController {
 	
 	private func setupSubviews(){
 		view.addSubview(tableView)
+
 		NSLayoutConstraint.activate([
 		tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
 		tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),

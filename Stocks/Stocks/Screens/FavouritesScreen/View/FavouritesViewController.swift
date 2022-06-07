@@ -8,9 +8,9 @@
 import UIKit
 
 class FavouritesViewController: UIViewController {
-	private let presenter: StocksPresenterProtocol
+	private let presenter: FavouriteStocksPresenterProtocol
 
-	init(presenter: StocksPresenterProtocol) {
+	init(presenter: FavouriteStocksPresenter) {
 		self.presenter = presenter
 		super.init(nibName: nil, bundle: nil)
 	}
@@ -37,6 +37,12 @@ class FavouritesViewController: UIViewController {
 		presenter.loadView()
 	}
 
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		tableView.reloadData()
+		self.view.layoutIfNeeded()
+	}
+
 	private func setupViews(){
 		view.backgroundColor = .white
 		title = "Favourites"
@@ -46,6 +52,7 @@ class FavouritesViewController: UIViewController {
 
 	private func setupSubviews(){
 		view.addSubview(tableView)
+
 		NSLayoutConstraint.activate([
 			tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
 			tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
@@ -55,7 +62,7 @@ class FavouritesViewController: UIViewController {
 	}
 }
 
-extension FavouritesViewController: StocksViewProtocol {
+extension FavouritesViewController: FvouriteStocksViewProtocol {
 	func updateView() {
 		tableView.reloadData()
 	}
@@ -90,7 +97,7 @@ extension FavouritesViewController: UITableViewDataSource, UITableViewDelegate {
 	}
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let model = presenter.model(for: indexPath)
+		let model = presenter.modelFavourites(for: indexPath)
 		let detailVC = Assembly.assembler.detailVC(model: model)
 		navigationController?.pushViewController(detailVC, animated: true)
 	}
