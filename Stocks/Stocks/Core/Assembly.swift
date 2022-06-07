@@ -10,6 +10,7 @@ import UIKit
 
 final class Assembly {
 	static let assembler: Assembly = .init()
+
 	let favouritesService: FavouritesServiceProtocol = FavouritesLocalService()
 
 	private init() {}
@@ -26,7 +27,7 @@ final class Assembly {
 	}
 
 	func favouritesModule() -> UIViewController {
-		let presenter = StocksPresenter(service: stocksService)
+		let presenter = FavouriteStocksPresenter(service: stocksService)
 		let view = FavouritesViewController(presenter: presenter)
 		presenter.view = view
 		return view

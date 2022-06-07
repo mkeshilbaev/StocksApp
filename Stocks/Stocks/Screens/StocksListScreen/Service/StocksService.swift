@@ -19,7 +19,6 @@ protocol StocksServiceProtocol {
 }
 
 final class StocksService: StocksServiceProtocol {
-	
 	private let network: NetworkService
 	
 	init(network: NetworkService) {
