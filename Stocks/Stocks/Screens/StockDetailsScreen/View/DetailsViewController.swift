@@ -14,6 +14,50 @@ final class DetailsViewController: UIViewController {
 		return view
 	}()
 
+	private lazy var chartsContainerView: ChartsContainerView = {
+		let view = ChartsContainerView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+		return view
+	}()
+
+	private lazy var priceLabelStackView: UIStackView = {
+		let stackView = UIStackView()
+		stackView.axis = .vertical
+		stackView.alignment = .center
+		stackView.distribution = .fillEqually
+		stackView.spacing = 8
+		stackView.translatesAutoresizingMaskIntoConstraints = false
+		return stackView
+	}()
+
+	private lazy var currentPriceLabel: UILabel = {
+		let label = UILabel()
+		label.font = UIFont.boldSystemFont(ofSize: 28)
+		label.text = presenter.price
+		label.translatesAutoresizingMaskIntoConstraints = false
+		return label
+	}()
+
+	private lazy var dayDeltaLabel: UILabel = {
+		let label = UILabel()
+		label.font = .systemFont(ofSize: 12)
+		label.textColor = UIColor(red: 36/255, green: 178/255, blue: 93/255, alpha: 1)
+		label.text = presenter.dayDelta
+		label.translatesAutoresizingMaskIntoConstraints = false
+		return label
+	}()
+
+	private lazy var buyButton: UIButton = {
+		let button = UIButton(type: .system)
+		button.setTitle("Buy for \(currentPriceLabel.text!)", for: .normal)
+		button.backgroundColor = .black
+		button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+		button.layer.cornerRadius = 16
+		button.setTitleColor(.white, for: .normal)
+		button.translatesAutoresizingMaskIntoConstraints = false
+		return button
+	}()
+
 	private let presenter: StocksDetailPresenterProtocol
 
 	override var hidesBottomBarWhenPushed: Bool {
@@ -42,6 +86,27 @@ final class DetailsViewController: UIViewController {
 
 	private func setupView() {
 		view.backgroundColor = .white
+
+		priceLabelStackView.addArrangedSubview(currentPriceLabel)
+		priceLabelStackView.addArrangedSubview(dayDeltaLabel)
+
+		view.addSubview(chartsContainerView)
+		view.addSubview(priceLabelStackView)
+		view.addSubview(buyButton)
+
+		NSLayoutConstraint.activate([
+			priceLabelStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 63),
+			priceLabelStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+			chartsContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			chartsContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+			chartsContainerView.topAnchor.constraint(equalTo: priceLabelStackView.bottomAnchor, constant: 30),
+
+			buyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+			buyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+			buyButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+			buyButton.heightAnchor.constraint(equalToConstant: 56)
+		])
 	}
 
 	private func setupNavigationBar() {
@@ -73,5 +138,17 @@ final class DetailsViewController: UIViewController {
 	@objc
 	private func backBattonTapped() {
 		navigationController?.popViewController(animated: true)
+	}
+}
+
+extension DetailsViewController: StocksDetailViewProtocol {
+	func updateView(withLoader isLoading: Bool) {
+		chartsContainerView.configure(with: isLoading)
+	}
+	func updateView(withError message: String) {
+		print("Error -", message)
+	}
+	func updateView(withModel model: ChartsModel) {
+		chartsContainerView.configure(with: model)
 	}
 }

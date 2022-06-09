@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Kingfisher
 import UIKit
 
 extension UIColor {
@@ -32,18 +33,9 @@ extension UIColor {
 }
 
 extension UIImageView {
-	func load(urlString: String){
-		guard let url = URL(string: urlString) else{ return }
-		
-		DispatchQueue.global().async { [weak self] in
-			if let data = try? Data(contentsOf: url) {
-				if let image = UIImage(data: data){
-					DispatchQueue.main.async {
-						self?.image = image
-					}
-				}
-			}
-		}
+	func setImage(from urlString: String?, placeholder: UIImage?){
+		guard let urlString = urlString, let url = URL(string: urlString) else { return }
+		kf.setImage(with: .network(url), placeholder: placeholder)
 	}
 }
 

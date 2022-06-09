@@ -17,7 +17,7 @@ protocol StocksViewProtocol: AnyObject {
 protocol StocksPresenterProtocol {
 	var view: StocksViewProtocol? { get set }
 	var itemsCount: Int { get }
-
+	
 	func loadView()
 	func model(for indexPath: IndexPath) -> StockModelProtocol
 }

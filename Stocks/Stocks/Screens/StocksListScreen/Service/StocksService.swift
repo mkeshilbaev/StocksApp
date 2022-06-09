@@ -20,12 +20,22 @@ protocol StocksServiceProtocol {
 
 final class StocksService: StocksServiceProtocol {
 	private let network: NetworkService
+	private var stocks: [StockModelProtocol] = []
 	
 	init(network: NetworkService) {
 		self.network = network
 	}
 	
 	func getStocks(currency: String, count: String, completion: @escaping (Result<[StockModelProtocol], NetworkError>) -> Void) {
+		if stocks.isEmpty {
+			fetch(currency: currency, count: count, completion: completion)
+			return
+		}
+		
+		completion(.success(stocks))
+	}
+
+	func fetch(currency: String, count: String, completion: @escaping (Result<[StockModelProtocol], NetworkError>) -> Void){
 		network.execute(with: StockRouter.stocks(currency: currency, count: count)) { [weak self] (result: Result<[Stock], NetworkError>) in
 			guard let self = self else { return }
 			switch result {

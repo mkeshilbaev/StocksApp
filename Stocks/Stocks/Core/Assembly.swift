@@ -34,7 +34,10 @@ final class Assembly {
 	}
 
 	func searchVC() -> UIViewController {
-		UIViewController()
+		let presenter = StocksPresenterProtocol(service: stocksService)
+		let view = SearchViewController(presenter: presenter)
+		presenter.view = view
+		return view
 	}
 
 	func tabBarController() -> UIViewController {

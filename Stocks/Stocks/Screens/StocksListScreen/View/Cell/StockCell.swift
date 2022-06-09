@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class StockCell: UITableViewCell {
 	private var favouriteAction: (() -> Void)?
@@ -90,7 +91,7 @@ final class StockCell: UITableViewCell {
 		currentPriceLabel.text = model.price
 		dayDeltaLabel.text = model.change
 		dayDeltaLabel.textColor = model.changeColor
-		iconImageView.load(urlString: model.iconUrl)
+		iconImageView.setImage(from: model.iconUrl, placeholder: UIImage(named: "YNDX"))
 
 		if indexPath.row.isMultiple(of: 2) {
 			containerView.backgroundColor = UIColor.StockCell.grayCellBackground
