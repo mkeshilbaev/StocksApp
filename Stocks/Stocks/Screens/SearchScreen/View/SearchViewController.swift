@@ -7,10 +7,11 @@
 
 import UIKit
 
-class SearchViewController: UITableViewController {
-	private let presenter: StocksPresenterProtocol
+class SearchViewController: UIViewController {
+	private let presenter: SearchPresenterProtocol
+	private var filteredStocks = [StockModelProtocol]()
 
-	init(presenter: StocksPresenterProtocol) {
+	init(presenter: SearchPresenterProtocol) {
 		self.presenter = presenter
 		super.init(nibName: nil, bundle: nil)
 	}
@@ -19,8 +20,16 @@ class SearchViewController: UITableViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	private var stocks = [StockModel]()
-	private var filteredStocks = [StockModel]()
+	private lazy var tableView: UITableView = {
+		let tableView = UITableView()
+		tableView.translatesAutoresizingMaskIntoConstraints = false
+		tableView.separatorStyle = .none
+		tableView.showsVerticalScrollIndicator = false
+		tableView.dataSource = self
+		tableView.delegate = self
+		tableView.register(StockCell.self, forCellReuseIdentifier: String(describing: StockCell.typeName))
+		return tableView
+	}()
 
 	private let searchController = UISearchController(searchResultsController: nil)
 
@@ -37,7 +46,10 @@ class SearchViewController: UITableViewController {
 		super.viewDidLoad()
 
 		setupViews()
+		setupSubviews()
 		setupSearchController()
+
+		presenter.loadView()
 	}
 
 	private func setupViews(){
@@ -55,44 +67,82 @@ class SearchViewController: UITableViewController {
 		definesPresentationContext = true
 	}
 
-	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	private func setupSubviews(){
+		view.addSubview(tableView)
+
+		NSLayoutConstraint.activate([
+		tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+		tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+		tableView.topAnchor.constraint(equalTo: view.topAnchor),
+		tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+		])
+	}
+}
+
+extension SearchViewController: SearchViewProtocol {
+	func updateView() {
+		tableView.reloadData()
+	}
+	func updateCell(for indexPath: IndexPath) {
+		tableView.reloadRows(at: [indexPath], with: .none)
+	}
+	func updateView(withLoader isLoading: Bool) {
+		print("Loader is -", isLoading, " at", Date())
+	}
+	func updateView(withError message: String) {
+		print("Error -", message)
+	}
+}
+
+extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
+
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: StockCell.typeName, for: indexPath) as? StockCell else {
+			return UITableViewCell()
+		}
+		cell.configure(with: filteredStocks[indexPath.row], for: indexPath)
+		return cell
+	}
+
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if isFiltering {
 			return filteredStocks.count
 		}
 		return 0
 	}
 
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: StockCell.typeName, for: indexPath) as? StockCell else {
-			return UITableViewCell()
-		}
-		cell.configure(with: presenter.model(for: indexPath), for: indexPath)
-		return cell
-	}
-
-	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		76
 	}
 
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let model = presenter.model(for: indexPath)
-		let detailVC = Assembly.assembler.detailVC(model: model)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let detailVC = Assembly.assembler.detailVC(model: filteredStocks[indexPath.row])
 		navigationController?.pushViewController(detailVC, animated: true)
 	}
 }
 
-
-// MARK: - UISearchResultsUpdating Delegate
 extension SearchViewController: UISearchResultsUpdating {
 	func updateSearchResults(for searchController: UISearchController) {
 		filterContentForSearchText(searchController.searchBar.text!)
 	}
 
 	private func filterContentForSearchText(_ searchText: String) {
-		filteredStocks = stocks.filter({ (stock: StockModel) -> Bool in
-			return stock.name.lowercased().contains(searchText.lowercased())
+		filteredStocks = presenter.stocksList.filter({ (stock: StockModelProtocol) -> Bool in
+			return stock.name.lowercased().contains(searchText.lowercased()) || stock.symbol.lowercased().contains(searchText.lowercased())
 		})
-
 		tableView.reloadData()
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

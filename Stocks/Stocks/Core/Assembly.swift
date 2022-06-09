@@ -18,6 +18,8 @@ final class Assembly {
 	private lazy var network: NetworkService = Network()
 	private lazy var stocksService: StocksServiceProtocol = StocksService(network: network)
 	private lazy var chartsService: ChartsServiceProtocol = ChartsService(network: network)
+	private lazy var searchService: SearchServiceProtocol = SearchService(network: network)
+
 
 	func stocksModule() -> UIViewController {
 		let presenter = StocksPresenter(service: stocksService)
@@ -34,7 +36,7 @@ final class Assembly {
 	}
 
 	func searchVC() -> UIViewController {
-		let presenter = StocksPresenterProtocol(service: stocksService)
+		let presenter = SearchPresenter(service: searchService)
 		let view = SearchViewController(presenter: presenter)
 		presenter.view = view
 		return view

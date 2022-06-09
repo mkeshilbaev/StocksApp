@@ -20,6 +20,8 @@
 		2B93E2E3283BFE3A002B326B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B93E2E1283BFE3A002B326B /* LaunchScreen.storyboard */; };
 		2B93E2EF283D1A18002B326B /* StockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B93E2EE283D1A18002B326B /* StockCell.swift */; };
 		2BC050102850B4CD0092DECF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC0500F2850B4CD0092DECF /* SearchViewController.swift */; };
+		2BC0501A2851C0310092DECF /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC050192851C0310092DECF /* SearchPresenter.swift */; };
+		2BC0501D2851C0460092DECF /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC0501C2851C0460092DECF /* SearchService.swift */; };
 		2BCF45AD283F6A3A00D520C3 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF45AC283F6A3A00D520C3 /* Router.swift */; };
 		2BCF45AF283F6E0B00D520C3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF45AE283F6E0B00D520C3 /* NetworkError.swift */; };
 		2BCF45B1283F6E2D00D520C3 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF45B0283F6E2D00D520C3 /* NetworkService.swift */; };
@@ -59,6 +61,8 @@
 		2B93E2E4283BFE3A002B326B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B93E2EE283D1A18002B326B /* StockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCell.swift; sourceTree = "<group>"; };
 		2BC0500F2850B4CD0092DECF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		2BC050192851C0310092DECF /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
+		2BC0501C2851C0460092DECF /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		2BCF45AC283F6A3A00D520C3 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		2BCF45AE283F6E0B00D520C3 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		2BCF45B0283F6E2D00D520C3 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -169,6 +173,8 @@
 		2BC0500E2850B48A0092DECF /* SearchScreen */ = {
 			isa = PBXGroup;
 			children = (
+				2BC0501B2851C0350092DECF /* Service */,
+				2BC050182851C01F0092DECF /* Presenter */,
 				2BC050112850B4D10092DECF /* View */,
 			);
 			path = SearchScreen;
@@ -180,6 +186,22 @@
 				2BC0500F2850B4CD0092DECF /* SearchViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		2BC050182851C01F0092DECF /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2BC050192851C0310092DECF /* SearchPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		2BC0501B2851C0350092DECF /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2BC0501C2851C0460092DECF /* SearchService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		2BCF45A4283F665D00D520C3 /* Screens */ = {
@@ -436,9 +458,11 @@
 				2BCF45B1283F6E2D00D520C3 /* NetworkService.swift in Sources */,
 				2B0426FC2849F9B700CFA56C /* FileManagerFavouritesService.swift in Sources */,
 				2BDE229C2844D48A003C38C4 /* ChartsResponse.swift in Sources */,
+				2BC0501A2851C0310092DECF /* SearchPresenter.swift in Sources */,
 				2BCF45B6283F813300D520C3 /* StocksService.swift in Sources */,
 				2BCF45AF283F6E0B00D520C3 /* NetworkError.swift in Sources */,
 				2BD420C4284E6A2800750354 /* FavouriteStocksPresenter.swift in Sources */,
+				2BC0501D2851C0460092DECF /* SearchService.swift in Sources */,
 				2B0426FE2849F9E200CFA56C /* UserDefaultsFavouritesService.swift in Sources */,
 				2BD420CC284F615A00750354 /* ChartsModel.swift in Sources */,
 				2B0426F82848E70100CFA56C /* DetailTitleView.swift in Sources */,
