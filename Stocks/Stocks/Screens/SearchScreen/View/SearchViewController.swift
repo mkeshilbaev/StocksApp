@@ -133,16 +133,3 @@ extension SearchViewController: UISearchResultsUpdating {
 		tableView.reloadData()
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

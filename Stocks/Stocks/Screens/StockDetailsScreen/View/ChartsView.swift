@@ -12,7 +12,6 @@ final class ChartsContainerView: UIView {
 
 	private lazy var chartsView: LineChartView = {
 		let view = LineChartView()
-//		view.backgroundColor = .blue
 		view.translatesAutoresizingMaskIntoConstraints = false
 		view.xAxis.drawLabelsEnabled = false
 		view.leftAxis.enabled = false
