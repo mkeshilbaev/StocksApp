@@ -7,8 +7,7 @@
 
 import Foundation
 
-///Реализация сохранения избранных в UserDefaults
-///Написали только для примера. Использовать его не будем.
+//Реализация сохранения избранных в UserDefaults
 final class FavouritesService: FavouritesServiceProtocol {
 	private let key = "favourite_key"
 	private lazy var favouriteIds: [String] = {
@@ -42,7 +41,6 @@ final class FavouritesService: FavouritesServiceProtocol {
 		}
 
 		UserDefaults.standard.set(data, forKey: key)
-		print("UserDefaults update")
 	}
 }
 

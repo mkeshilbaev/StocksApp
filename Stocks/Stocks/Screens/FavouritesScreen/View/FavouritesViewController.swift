@@ -30,17 +30,21 @@ class FavouritesViewController: UIViewController {
 		return tableView
 	}()
 
+	private lazy var loader: UIActivityIndicatorView = {
+		let view = UIActivityIndicatorView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+		return view
+	}()
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupViews()
 		setupSubviews()
-		presenter.loadView()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		tableView.reloadData()
-		self.view.layoutIfNeeded()
+		presenter.loadView()
 	}
 
 	private func setupViews(){
@@ -52,30 +56,17 @@ class FavouritesViewController: UIViewController {
 
 	private func setupSubviews(){
 		view.addSubview(tableView)
+		view.addSubview(loader)
 
 		NSLayoutConstraint.activate([
 			tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
 			tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
 			tableView.topAnchor.constraint(equalTo: view.topAnchor),
-			tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+			tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+			loader.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+			loader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
 		])
-	}
-}
-
-extension FavouritesViewController: FvouriteStocksViewProtocol {
-	func updateView() {
-		tableView.reloadData()
-	}
-	func updateCell(for indexPath: IndexPath) {
-		tableView.reloadRows(at: [indexPath], with: .none)
-	}
-
-	func updateView(withLoader isLoading: Bool) {
-		print("Loader is -", isLoading, " at", Date())
-	}
-
-	func updateView(withError message: String) {
-		print("Error -", message)
 	}
 }
 
@@ -102,3 +93,23 @@ extension FavouritesViewController: UITableViewDataSource, UITableViewDelegate {
 		navigationController?.pushViewController(detailVC, animated: true)
 	}
 }
+
+extension FavouritesViewController: FvouriteStocksViewProtocol {
+	func updateView() {
+		tableView.reloadData()
+	}
+	func updateCell(for indexPath: IndexPath) {
+		tableView.reloadRows(at: [indexPath], with: .none)
+	}
+	func updateView(withLoader isLoading: Bool) {
+		isLoading ? loader.startAnimating() : loader.stopAnimating()
+	}
+
+	func updateView(withError message: String) {
+		let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+		self.present(alert, animated: true, completion: nil)
+	}
+}
+
+

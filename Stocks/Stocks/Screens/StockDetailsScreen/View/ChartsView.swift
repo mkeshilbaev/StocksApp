@@ -87,7 +87,7 @@ final class ChartsContainerView: UIView {
 		titles.enumerated().forEach{ (index, title) in
 			let button = UIButton()
 			button.tag = index
-			button.backgroundColor = UIColor(red: 240/255, green: 244/255, blue: 247/255, alpha: 1)
+			button.backgroundColor = .chartsButtonColor
 			button.setTitle(title, for: .normal)
 			button.setTitleColor(.black, for: .normal)
 			button.titleLabel?.font = .boldSystemFont(ofSize: 12)
@@ -100,7 +100,7 @@ final class ChartsContainerView: UIView {
 
 	@objc private func periodButtonTapped(sender: UIButton){
 		buttonsStackView.subviews.compactMap { $0 as? UIButton }.forEach{ button in
-			button.backgroundColor = UIColor(red: 240/255, green: 244/255, blue: 247/255, alpha: 1)
+			button.backgroundColor = .chartsButtonColor
 			button.setTitleColor(.black, for: .normal)
 		}
 		sender.backgroundColor = .black

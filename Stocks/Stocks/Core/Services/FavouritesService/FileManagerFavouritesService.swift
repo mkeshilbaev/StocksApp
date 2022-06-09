@@ -54,8 +54,9 @@ final class FavouritesLocalService: FavouritesServiceProtocol {
 	}
 	
 	private func post(id: String) {
-		NotificationCenter.default.post(name: NSNotification.Name.favourites,
-										object: nil,
-										userInfo: ["id": id])
+		NotificationCenter.default.post(
+			name: NSNotification.Name.favourites,
+			object: nil,
+			userInfo: ["id": id])
 	}
 }

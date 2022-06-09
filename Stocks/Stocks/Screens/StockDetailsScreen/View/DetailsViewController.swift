@@ -111,10 +111,11 @@ final class DetailsViewController: UIViewController {
 
 	private func setupNavigationBar() {
 		navigationItem.titleView = titleView
-		let backButton =  UIBarButtonItem(image: UIImage(named: "back"),
-										  style: .plain,
-										  target: self,
-										  action: #selector(backBattonTapped))
+		let backButton =  UIBarButtonItem(
+			image: UIImage(named: "back"),
+			style: .plain,
+			target: self,
+			action: #selector(backBattonTapped))
 		backButton.tintColor = .black
 		navigationItem.leftBarButtonItem = backButton
 	}
@@ -146,7 +147,9 @@ extension DetailsViewController: StocksDetailViewProtocol {
 		chartsContainerView.configure(with: isLoading)
 	}
 	func updateView(withError message: String) {
-		print("Error -", message)
+		let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+		self.present(alert, animated: true, completion: nil)
 	}
 	func updateView(withModel model: ChartsModel) {
 		chartsContainerView.configure(with: model)

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 final class StockCell: UITableViewCell {
 	private var favouriteAction: (() -> Void)?
@@ -27,7 +26,7 @@ final class StockCell: UITableViewCell {
 
 	private lazy var companyNameLabel: UILabel = {
 		let label = UILabel()
-		label.font = .systemFont(ofSize: 12)
+		label.font = .systemFont(ofSize: 11)
 		return label
 	}()
 

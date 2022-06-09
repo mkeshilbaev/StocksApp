@@ -16,6 +16,9 @@ extension UIColor {
 	static let stockPriceDown: UIColor = {
 		UIColor(red: 254/255, green: 61/255, blue: 48/255, alpha: 1.0)
 	}()
+	static let chartsButtonColor: UIColor = {
+		UIColor(red: 240/255, green: 244/255, blue: 247/255, alpha: 1)
+	}()
 }
 
 extension UIColor {
