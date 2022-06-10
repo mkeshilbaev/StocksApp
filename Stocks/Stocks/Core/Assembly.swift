@@ -63,7 +63,7 @@ final class Assembly {
 	func detailVC(model: StockModelProtocol) -> UIViewController {
 		let presenter = StocksDetailPresenter(model: model, service: chartsService)
 		let view = DetailsViewController(presenter: presenter)
-		presenter.view = view as? StocksDetailViewProtocol
+		presenter.view = view
 		return view
 	}
 }

@@ -18,7 +18,7 @@ protocol StocksDetailPresenterProtocol {
 	var favouriteButtonIsSelected: Bool { get }
 	var price: String { get }
 	var dayDelta: String { get }
-	
+
 	func loadView()
 	func favouriteButtonTapped()
 }
@@ -58,7 +58,6 @@ final class StocksDetailPresenter: StocksDetailPresenterProtocol {
 			case let .success(charts):
 				let chartsModel = ChartsModel.build(from: charts)
 				self?.view?.updateView(withModel: chartsModel)
-				print(chartsModel)
 			case let .failure(error):
 				self?.view?.updateView(withError: error.localizedDescription)
 			}

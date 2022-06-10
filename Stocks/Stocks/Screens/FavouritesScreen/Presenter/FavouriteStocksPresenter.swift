@@ -63,7 +63,7 @@ final class FavouriteStocksPresenter: FavouriteStocksPresenterProtocol {
 extension FavouriteStocksPresenter: FavouritesUpdateServiceProtocol {
 	func setFavourite(notification: Notification) {
 		guard let id = notification.stockID,
-			  let index = stocks.filter{ $0.isFavourite }.firstIndex(where: { $0.id == id }) else { return }
+			  let index = stocks.filter({ $0.isFavourite }).firstIndex(where: { $0.id == id }) else { return }
 		let indexPath = IndexPath(row: index, section: 0)
 		view?.updateCell(for: indexPath)
 	}

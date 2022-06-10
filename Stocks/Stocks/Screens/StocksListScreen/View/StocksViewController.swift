@@ -41,7 +41,6 @@ final class StocksViewController: UIViewController {
 		
 		setupViews()
 		setupSubviews()
-		presenter.loadView()
 	}
 
 	override func viewWillAppear(_ animated: Bool) {

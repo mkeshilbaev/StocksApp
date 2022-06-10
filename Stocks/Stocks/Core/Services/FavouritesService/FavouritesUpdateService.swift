@@ -17,7 +17,8 @@ extension FavouritesUpdateServiceProtocol {
 			self,
 			selector: #selector(setFavourite),
 			name: NSNotification.Name.favourites,
-			object: nil)
+			object: nil
+		)
 	}
 }
 
